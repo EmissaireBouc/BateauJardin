@@ -1,25 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/Animation/PJ.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://scripts/Control.gd" type="Script" id=2]
 [ext_resource path="res://scripts/PlayerControl.gd" type="Script" id=4]
 
-[node name="ControlPersonnage" type="Control"]
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Line2D" type="Line2D" parent="."]
-z_index = 1
-
-[node name="Player" type="AnimatedSprite" parent="."]
-z_index = 1
+[node name="Player" type="AnimatedSprite"]
 frames = ExtResource( 1 )
 animation = "WALK_W"
 offset = Vector2( 0, -30 )
 script = ExtResource( 4 )
-speed = 200
+__meta__ = {
+"_editor_description_": ""
+}
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
+[node name="Line2D" type="Line2D" parent="."]
+z_index = 1
+width = 2.0
+default_color = Color( 0.968627, 0.215686, 0.215686, 1 )

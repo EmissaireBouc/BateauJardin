@@ -16,7 +16,6 @@ _global_script_class_icons={
 [application]
 
 config/name="BateauJardin"
-config/icon="res://Assets/Decors/icon.png"
 
 [input]
 
