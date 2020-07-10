@@ -1,3 +1,8 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource path="res://Assets/Decors/TstBato.png" type="Texture" id=1]
+
+[node name="Bateau" type="Node2D"]
+
+[node name="Bateau" type="Sprite" parent="."]
+texture = ExtResource( 1 )
