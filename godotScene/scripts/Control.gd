@@ -15,6 +15,7 @@ onready var Player : AnimatedSprite = $YSort/Player
 func _unhandled_input(event):
 	if !Input.is_action_pressed("ui_left_mouse"):
 		return
+	
 	# Création du chemin entre la position du personnage et le mouse(x,y)
 	var new_path = nav2D.get_simple_path(Player.get_global_position(), get_global_mouse_position())
 	

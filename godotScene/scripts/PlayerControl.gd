@@ -11,6 +11,7 @@ enum{IDLE, MOVE}
 
 func _ready():
 	destination = position
+	
 
 func _process(delta):
 
