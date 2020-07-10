@@ -4,22 +4,7 @@
 [ext_resource path="res://Assets/UI/bouton_normal.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/bouton_presser.png" type="Texture" id=3]
 [ext_resource path="res://Assets/UI/bouton_survoler.png" type="Texture" id=4]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends TextureButton
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
+[ext_resource path="res://Scripts/BoutonCommencer.gd" type="Script" id=5]
 
 [node name="MarginContainer" type="MarginContainer"]
 anchor_right = 1.0
@@ -35,42 +20,43 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 120.0
 margin_top = 80.0
-margin_right = 904.0
-margin_bottom = 520.0
+margin_right = 1800.0
+margin_bottom = 1000.0
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_right = 784.0
-margin_bottom = 144.0
+margin_right = 1680.0
+margin_bottom = 304.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Titre" type="TextureRect" parent="VBoxContainer/CenterContainer"]
-margin_left = 360.0
-margin_top = 40.0
-margin_right = 424.0
-margin_bottom = 104.0
+margin_left = 808.0
+margin_top = 120.0
+margin_right = 872.0
+margin_bottom = 184.0
 texture = ExtResource( 1 )
 stretch_mode = 3
 
 [node name="BoutonCommencer" type="TextureButton" parent="VBoxContainer"]
-margin_top = 148.0
-margin_right = 784.0
-margin_bottom = 292.0
+margin_top = 308.0
+margin_right = 1680.0
+margin_bottom = 612.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 3 )
 texture_hover = ExtResource( 4 )
 stretch_mode = 2
-script = SubResource( 1 )
+script = ExtResource( 5 )
 
 [node name="BoutonOptions" type="TextureButton" parent="VBoxContainer"]
-margin_top = 296.0
-margin_right = 784.0
-margin_bottom = 440.0
+margin_top = 616.0
+margin_right = 1680.0
+margin_bottom = 920.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 3 )
 texture_hover = ExtResource( 4 )
 stretch_mode = 2
+[connection signal="pressed" from="VBoxContainer/BoutonCommencer" to="VBoxContainer/BoutonCommencer" method="_on_BoutonCommencer_pressed"]

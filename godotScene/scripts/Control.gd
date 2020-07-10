@@ -18,7 +18,14 @@ func _unhandled_input(event):
 	
 	# Création du chemin entre la position du personnage et le mouse(x,y)
 	var new_path = nav2D.get_simple_path(Player.get_global_position(), get_global_mouse_position())
-	
+		
 	Line2D.points = new_path
 	Player.path = new_path
 	Player.change_state(MOVE)
+
+# Ouverture du menu contextuel	
+func _input(event):
+	if Input.is_action_pressed("ui_right_mouse"):
+		var MenuInteractions = load("res://Scenes/Menu_interactions.tscn").instance()
+		add_child(MenuInteractions)
+		
