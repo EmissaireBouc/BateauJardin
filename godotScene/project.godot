@@ -17,7 +17,6 @@ _global_script_class_icons={
 
 config/name="BateauJardin"
 run/main_scene="res://Scenes/Bateau_Pont.tscn"
-
 config/icon="res://Assets/UI/icon.png"
 
 [display]

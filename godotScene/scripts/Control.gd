@@ -28,4 +28,6 @@ func _input(event):
 	if Input.is_action_pressed("ui_right_mouse"):
 		var MenuInteractions = load("res://Scenes/Menu_interactions.tscn").instance()
 		add_child(MenuInteractions)
-		
+
+
+	
