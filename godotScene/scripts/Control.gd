@@ -23,8 +23,5 @@ func _unhandled_input(event):
 	Player.change_state(MOVE)
 
 # Ouverture du menu contextuel	
-func _input(event):
-	if Input.is_action_pressed("ui_right_mouse"):
-		var MenuInteractions = load("res://Scenes/Menu_interactions.tscn").instance()
-		add_child(MenuInteractions)
+
 		
