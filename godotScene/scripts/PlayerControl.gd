@@ -5,9 +5,13 @@ export (int) var speed = 30
 var move_direction = 30 #prend un angle en degré
 var state #défini l'état du personnage (marche, idle, interact)
 var path : PoolVector2Array
+var destination = Vector2()
 
 enum{IDLE, MOVE}
 
+func _ready():
+	destination = position
+	
 
 func _process(delta):
 
