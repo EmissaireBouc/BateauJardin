@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Mask/Transition.tres" type="Material" id=1]
-[ext_resource path="res://scripts/Transition.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Transition.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "transition_in"
@@ -39,7 +39,7 @@ material = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

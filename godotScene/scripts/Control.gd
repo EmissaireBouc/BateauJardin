@@ -95,4 +95,3 @@ func _on_Area2D_mouse_exited():
 	if cursor == "default":
 		var ndefault = load("res://Assets/UI/Curseur/Curs__1.png")
 		Input.set_custom_mouse_cursor(ndefault)
-
