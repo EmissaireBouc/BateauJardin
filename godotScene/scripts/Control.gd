@@ -23,5 +23,4 @@ func _unhandled_input(event):
 	Player.change_state(MOVE)
 
 # Ouverture du menu contextuel	
-
 		
