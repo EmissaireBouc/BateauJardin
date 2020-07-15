@@ -4,7 +4,14 @@
 [ext_resource path="res://Assets/UI/bouton_presser.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/bouton_survoler.png" type="Texture" id=3]
 
-[node name="MenuInteractions" type="CanvasLayer"]
+
+[node name="MenuInteractions" type="MarginContainer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -113.0
+margin_bottom = -49.0
+
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_top = 936.0

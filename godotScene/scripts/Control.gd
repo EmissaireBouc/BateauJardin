@@ -25,6 +25,7 @@ onready var Player : AnimatedSprite = $YSort/Player
 func _unhandled_input(event):
 	if !Input.is_action_pressed("ui_left_mouse"):
 		return
+
 	if Input.is_action_pressed("ui_left_mouse"):
 		if cursor == "default":
 			# Création du chemin entre la position du personnage et le mouse(x,y)
@@ -95,3 +96,4 @@ func _on_Area2D_mouse_exited():
 	if cursor == "default":
 		var ndefault = load("res://Assets/UI/Curseur/Curs__1.png")
 		Input.set_custom_mouse_cursor(ndefault)
+
