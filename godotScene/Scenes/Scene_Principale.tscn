@@ -18,6 +18,17 @@ script = ExtResource( 1 )
 position = Vector2( -1025.28, -606.253 )
 navpoly = ExtResource( 3 )
 
+[node name="Area2D" type="Area2D" parent="Bateau/WalkArea"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bateau/WalkArea/Area2D"]
+
+[node name="Jardin" type="Area2D" parent="Bateau"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bateau/Jardin"]
+position = Vector2( -9.10361, -3.05176e-05 )
+scale = Vector2( 1.00454, 1 )
+polygon = PoolVector2Array( 248, 432, 144, 728, 1104, 720, 1200, 608, 1576, 600, 1504, 360, 1192, 360, 1120, 424, 976, 424, 992, 640, 600, 648, 600, 432 )
+
 [node name="YSort" type="YSort" parent="."]
 editor/display_folded = true
 
@@ -40,6 +51,14 @@ texture_mode = -1094713346
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+
+[node name="Transition" parent="CanvasLayer" instance=ExtResource( 6 )]
+[connection signal="mouse_entered" from="Bateau/WalkArea/Area2D" to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="Bateau/WalkArea/Area2D" to="." method="_on_Area2D_mouse_exited"]
+[connection signal="input_event" from="Bateau/Jardin" to="." method="_on_Area2D_input_event"]
+[connection signal="mouse_entered" from="Bateau/Jardin" to="." method="_on_Jardin_mouse_entered"]
+[connection signal="mouse_exited" from="Bateau/Jardin" to="." method="_on_Jardin_mouse_exited"]
+
 [node name="Control" type="Control" parent="CanvasLayer"]
 anchor_top = 1.0
 anchor_right = 1.0
@@ -48,5 +67,6 @@ margin_top = -114.0
 margin_bottom = -26.0
 
 [node name="MenuInteractions" parent="CanvasLayer/Control" instance=ExtResource( 6 )]
+
 
 [editable path="YSort/Player"]
