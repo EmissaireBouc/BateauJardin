@@ -45,13 +45,13 @@ func _input(event):
 		else:
 			cursor_mode("planter")
 			$MenuInteractions.queue_free()
-		
+
 
 
 
 func _ready():
 	cursor_mode("default")
-	
+
 
 #Ne fonctionne pas pour le moment
 #func create_area2D():
@@ -64,8 +64,7 @@ func cursor_mode(newMode):
 		Input.set_custom_mouse_cursor(default)
 	if (newMode == "planter"):
 		Input.set_custom_mouse_cursor(planter)
-	
-	
+
 
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
