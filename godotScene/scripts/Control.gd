@@ -3,11 +3,13 @@ extends Node2D
 # Load the custom images for the mouse cursor.
 var default = load("res://Assets/UI/Curseur/Curs__0.png")
 var planter = load("res://Assets/UI/Curseur/Curs__2.png")
-
 var cursor = "default"
-var jardin = []
 
+#Tableau des plantes
+var aGarden = []
 
+export (int) var day = 0
+export (int) var pa = 5
 
 
 # enum est une énumération des différentes actions que le personnage peut effectuer
@@ -19,7 +21,6 @@ onready var nav2D : Navigation2D = $Bateau/WalkArea
 # Line2D trace une ligne (débug)
 onready var Line2D : Line2D = $YSort/Line2D
 onready var Player : AnimatedSprite = $YSort/Player
-
 
 # _unhandled_input(event) récupère l'input souris DANS la scène active (normalement doit permettre de distinguer des inputs qui ont lieu dans le HUD) 
 func _unhandled_input(event):
@@ -34,7 +35,6 @@ func _unhandled_input(event):
 			Player.path = new_path
 			Player.change_state(MOVE)
 
-
 # Ouverture du menu contextuel
 func _input(event):
 	if Input.is_action_pressed("ui_right_mouse"): 
@@ -46,17 +46,14 @@ func _input(event):
 			cursor_mode("planter")
 			$MenuInteractions.queue_free()
 
-
-
-
 func _ready():
 	cursor_mode("default")
-
+	fondu("transition_out")
+	$CanvasLayer/Transition.visible = true
 
 #Ne fonctionne pas pour le moment
 #func create_area2D():
 #	$Bateau/WalkArea/Area2D/CollisionPolygon2D.set_polygon($Bateau/WalkArea/NavigationPolygonInstance.navpoly.vertices)
-
 
 func cursor_mode(newMode):
 	cursor = newMode
@@ -65,33 +62,70 @@ func cursor_mode(newMode):
 	if (newMode == "planter"):
 		Input.set_custom_mouse_cursor(planter)
 
-
-
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && Input.is_action_pressed("ui_left_mouse") && cursor == "planter"):
-		var plante = preload("res://Scenes/Plante.tscn").instance()
-		$YSort.add_child(plante)
-		jardin.push_front(plante)
-		jardin[0].position = get_global_mouse_position()
+		if pa > 0: action_planter()
+		else: pass
 
+func action_planter():
+	var plante = preload("res://Scenes/PlanteScene/Plante.tscn").instance()
+	plante.init("Cosmos") # mettre une variable String avec le nom de la plante à créer
+	$YSort.add_child(plante)
+	aGarden.push_front(plante)
+	aGarden[0].position = get_global_mouse_position()
+	pa -= 1
+	$CanvasLayer/Transition/PA.PA_update(pa)
 
 func _on_Jardin_mouse_entered():
 	if cursor == "planter":
 		Input.set_custom_mouse_cursor(planter)
-
 
 func _on_Jardin_mouse_exited():
 	if cursor == "planter":
 		var nplanter = load("res://Assets/UI/Curseur/Curs__3.png")
 		Input.set_custom_mouse_cursor(nplanter)
 
-
 func _on_Area2D_mouse_entered():
 	if cursor == "default":
 		Input.set_custom_mouse_cursor(default)
-
 
 func _on_Area2D_mouse_exited():
 	if cursor == "default":
 		var ndefault = load("res://Assets/UI/Curseur/Curs__1.png")
 		Input.set_custom_mouse_cursor(ndefault)
+
+func _on_Porte_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && Input.is_action_pressed("ui_left_mouse")):
+		fondu("transition_in")
+
+func _on_Transition_transition_over(t):
+	
+	if t == "transition_in":
+		a_day_pass()
+	if t == "transition_out":
+		$CanvasLayer/Transition/Jour.visible = false
+
+func a_day_pass():
+	day += 1
+	pa = 5 
+	$CanvasLayer/Transition/PA.PA_update(pa)
+	$CanvasLayer/Transition/Jour.text = "Jour "+str(day)
+	$CanvasLayer/Transition/Jour.visible = true
+	$CanvasLayer/Transition.waitForClick = true
+	plante_XP_up()
+	plante_PV_down()
+
+func plante_PV_down():
+	for i in range(aGarden.size()):
+		aGarden[i].pv -= 1
+		if aGarden[i].pv <= 0:
+			aGarden[i].fane()
+
+func plante_XP_up():
+	for i in range(aGarden.size()):
+		aGarden[i].xp -= 1
+		if aGarden[i].xp == 0:
+			aGarden[i].LVL_up()
+
+func fondu(animName):
+	$CanvasLayer/Transition/AnimationPlayer.play(animName)

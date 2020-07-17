@@ -1,7 +1,7 @@
 extends AnimatedSprite
 
 
-export (int) var speed = 30
+export (int) var speed = 100
 var move_direction = 30 #prend un angle en degré
 var state #défini l'état du personnage (marche, idle, interact)
 var path : PoolVector2Array
@@ -67,6 +67,7 @@ func animation_loop(mode):
 		anim_direction = "W"
 	elif move_direction <= -60 and move_direction >= -120 :
 		anim_direction = "N"
+
 
 	animation = anim_mode + "_" + anim_direction
 	self.play(animation) 

@@ -1,10 +1,22 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/Control.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Bateau_Pont.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/WalkingArea_Mask/Bateau_Pont.tres" type="NavigationPolygon" id=3]
 [ext_resource path="res://Scenes/Cabine.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Personnage.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Transition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Menu_interactions.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/UI/Font/Quicksand_Bold.otf" type="DynamicFontData" id=8]
+[ext_resource path="res://Scenes/PA.gd" type="Script" id=9]
+
+[sub_resource type="DynamicFont" id=2]
+size = 26
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 8 )
 
 [node name="ScenePrincipale" type="Node2D"]
 script = ExtResource( 1 )
@@ -33,8 +45,16 @@ polygon = PoolVector2Array( 248, 432, 144, 728, 1104, 720, 1200, 608, 1576, 600,
 [node name="Cabine" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( -224, -80 )
 
+[node name="Porte" type="Area2D" parent="YSort"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/Porte"]
+polygon = PoolVector2Array( -264, 32, -264, -64, -192, -64, -192, 32 )
+
+[node name="Polygon2D" type="Polygon2D" parent="YSort/Porte"]
+color = Color( 0.337255, 0.152941, 0.541176, 1 )
+polygon = PoolVector2Array( -264, 32, -264, -64, -184, -64, -184, 32 )
+
 [node name="Player" parent="YSort" instance=ExtResource( 5 )]
-speed = 200
 
 [node name="Line2D" parent="YSort/Player" index="0"]
 texture_mode = -1107296256
@@ -43,13 +63,74 @@ texture_mode = -1107296256
 current = true
 
 [node name="Line2D" type="Line2D" parent="YSort"]
+visible = false
 width = 2.0
 default_color = Color( 0.780392, 0.262745, 0.192157, 1 )
 texture_mode = -1094713346
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -68.0
+margin_bottom = -68.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuInteractions" parent="CanvasLayer/Control" instance=ExtResource( 7 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -32.0
+margin_bottom = 32.0
+
+[node name="Transition" parent="CanvasLayer" instance=ExtResource( 6 )]
+visible = false
+mouse_filter = 2
+
+[node name="PA" type="Label" parent="CanvasLayer/Transition"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -104.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "PA : "
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jour" type="Label" parent="CanvasLayer/Transition"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -45.5
+margin_right = 960.0
+margin_bottom = 45.5
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Jour"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="mouse_entered" from="Bateau/WalkArea/Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Bateau/WalkArea/Area2D" to="." method="_on_Area2D_mouse_exited"]
 [connection signal="input_event" from="Bateau/Jardin" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="Bateau/Jardin" to="." method="_on_Jardin_mouse_entered"]
 [connection signal="mouse_exited" from="Bateau/Jardin" to="." method="_on_Jardin_mouse_exited"]
+[connection signal="input_event" from="YSort/Porte" to="." method="_on_Porte_input_event"]
+[connection signal="gui_input" from="CanvasLayer/Transition" to="CanvasLayer/Transition" method="_on_Transition_gui_input"]
+[connection signal="transition_over" from="CanvasLayer/Transition" to="." method="_on_Transition_transition_over"]
 
 [editable path="YSort/Player"]

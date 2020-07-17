@@ -16,8 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="BateauJardin"
-run/main_scene="res://Scenes/Bateau_Pont.tscn"
+run/main_scene="res://Scenes/Scene_Principale.tscn"
 config/icon="res://Assets/UI/icon.png"
+
+[autoload]
+
+ImportData="*res://Scripts/ImportData.gd"
 
 [display]
 
