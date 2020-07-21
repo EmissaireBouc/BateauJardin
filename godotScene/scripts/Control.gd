@@ -39,9 +39,9 @@ func _unhandled_input(event):
 func _input(event):
 	if Input.is_action_pressed("ui_right_mouse"):
 		if get_node_or_null("MenuInteractions") == null:
-			#$CanvasLayer/Control/MenuInteractions.visible = true
-			var MenuInteractions = load("res://Scenes/Menu_interactions.tscn").instance()
-			add_child(MenuInteractions)
+			$CanvasLayer/Control/MenuInteractions.visible = true
+			#var MenuInteractions = load("res://Scenes/Menu_interactions.tscn").instance()
+			#add_child(MenuInteractions)
 			cursor_mode("default")
 		else:
 			cursor_mode("planter")

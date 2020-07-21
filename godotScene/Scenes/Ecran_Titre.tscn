@@ -1,62 +1,64 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/UI/icon.png" type="Texture" id=1]
-[ext_resource path="res://Assets/UI/bouton_normal.png" type="Texture" id=2]
-[ext_resource path="res://Assets/UI/bouton_presser.png" type="Texture" id=3]
-[ext_resource path="res://Assets/UI/bouton_survoler.png" type="Texture" id=4]
-[ext_resource path="res://Scripts/BoutonCommencer.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Decors/icon.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/BoutonMenu.gd" type="Script" id=2]
 
-[node name="MarginContainer" type="MarginContainer"]
+[node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 120
-custom_constants/margin_top = 80
-custom_constants/margin_left = 120
-custom_constants/margin_bottom = 80
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 120.0
-margin_top = 80.0
-margin_right = 1800.0
-margin_bottom = 1000.0
-
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_right = 1680.0
-margin_bottom = 304.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Titre" type="TextureRect" parent="VBoxContainer/CenterContainer"]
-margin_left = 808.0
-margin_top = 120.0
-margin_right = 872.0
-margin_bottom = 184.0
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 1 )
-stretch_mode = 3
+expand = true
 
-[node name="BoutonCommencer" type="TextureButton" parent="VBoxContainer"]
-margin_top = 308.0
-margin_right = 1680.0
-margin_bottom = 612.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+margin_left = 150.0
+margin_top = 100.0
+margin_right = -150.0
+margin_bottom = 236.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 1620.0
+margin_bottom = 136.0
+
+[node name="Menu" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 1620.0
+margin_bottom = 136.0
+size_flags_vertical = 3
+custom_constants/separation = 200
+
+[node name="Jouer" type="Button" parent="MarginContainer/VBoxContainer/Menu"]
+margin_right = 406.0
+margin_bottom = 136.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource( 2 )
-texture_pressed = ExtResource( 3 )
-texture_hover = ExtResource( 4 )
-stretch_mode = 2
-script = ExtResource( 5 )
+text = "Jouer"
+script = ExtResource( 2 )
 
-[node name="BoutonOptions" type="TextureButton" parent="VBoxContainer"]
-margin_top = 616.0
-margin_right = 1680.0
-margin_bottom = 920.0
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer/Menu"]
+margin_left = 606.0
+margin_right = 1012.0
+margin_bottom = 136.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource( 2 )
-texture_pressed = ExtResource( 3 )
-texture_hover = ExtResource( 4 )
-stretch_mode = 2
-[connection signal="pressed" from="VBoxContainer/BoutonCommencer" to="VBoxContainer/BoutonCommencer" method="_on_BoutonCommencer_pressed"]
+text = "Options"
+script = ExtResource( 2 )
+
+[node name="Quitter" type="Button" parent="MarginContainer/VBoxContainer/Menu"]
+margin_left = 1212.0
+margin_right = 1620.0
+margin_bottom = 136.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Quitter"
+script = ExtResource( 2 )
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Menu/Jouer" to="MarginContainer/VBoxContainer/Menu/Jouer" method="_on_Jouer_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Menu/Options" to="MarginContainer/VBoxContainer/Menu/Options" method="_on_Options_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Menu/Quitter" to="MarginContainer/VBoxContainer/Menu/Quitter" method="_on_Quitter_pressed"]
