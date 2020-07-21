@@ -25,35 +25,3 @@ func LVL_up():
 func fane():
 	get_child(0).play("fane")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#	for N in get_children():
-#		if N.get_child_count() > 0:
-#
-#			if N.get_name() != plant:
-#				print(N)
-#				print(N.get_name())
-#				N.queue_free()
-#
-#
-#		else:
-#			if N.get_name() != plant:
-#				N.queue_free()

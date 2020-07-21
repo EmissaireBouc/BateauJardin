@@ -5,5 +5,10 @@
 [node name="Cabine" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -40 )
 texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite"]
+polygon = PoolVector2Array( -168, 16, -168, 168, 176, 168, 168, 16 )
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="Sprite"]

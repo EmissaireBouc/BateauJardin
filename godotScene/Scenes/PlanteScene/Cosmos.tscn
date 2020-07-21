@@ -21,42 +21,42 @@ region = Rect2( 140, 70, 70, 70 )
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 140, 70, 70 )
+region = Rect2( 0, 0, 70, 70 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 70, 70 )
+region = Rect2( 70, 0, 70, 70 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 70, 0, 70, 70 )
+region = Rect2( 140, 0, 70, 70 )
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 140, 0, 70, 70 )
+region = Rect2( 210, 0, 70, 70 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 210, 0, 70, 70 )
+region = Rect2( 280, 0, 70, 70 )
 
 [sub_resource type="AtlasTexture" id=9]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 280, 0, 70, 70 )
+region = Rect2( 0, 210, 70, 70 )
 
 [sub_resource type="AtlasTexture" id=10]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 210, 70, 70 )
+region = Rect2( 0, 280, 70, 70 )
 
 [sub_resource type="AtlasTexture" id=11]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 280, 70, 70 )
+region = Rect2( 0, 140, 70, 70 )
 
 [sub_resource type="SpriteFrames" id=12]
 animations = [ {
@@ -65,27 +65,30 @@ animations = [ {
 "name": "lvl1",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 4 ) ],
-"loop": true,
-"name": "lvl2",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": false,
 "name": "apparition",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 10 ) ],
+"frames": [ SubResource( 9 ) ],
 "loop": true,
 "name": "lvl3",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 11 ) ],
+"frames": [ SubResource( 10 ) ],
 "loop": true,
 "name": "fane",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 11 ) ],
+"loop": true,
+"name": "lvl2",
 "speed": 5.0
 } ]
 
 [node name="Cosmos" instance=ExtResource( 1 )]
 frames = SubResource( 12 )
 animation = "lvl3"
+
+[node name="CollisionPolygon2D" parent="Area2D" index="0"]
+polygon = PoolVector2Array( -24, -8, -24, 8, 16, 8, 16, -8 )

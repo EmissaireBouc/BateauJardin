@@ -7,7 +7,9 @@ var state #défini l'état du personnage (marche, idle, interact)
 var path : PoolVector2Array
 var destination = Vector2()
 
-enum{IDLE, MOVE}
+enum{IDLE, MOVE, PLANT}
+
+signal walkover
 
 func _ready():
 	destination = position
@@ -22,6 +24,9 @@ func _process(delta):
 			var move_distance = speed * delta
 			move_along_path(move_distance)
 			animation_loop("WALK")
+		PLANT:
+			animation_loop("PLANT")
+			
 
 
 func move_along_path(distance):
@@ -39,12 +44,16 @@ func move_along_path(distance):
 
 		if(path.size() == 0):
 			change_state(IDLE)
+			emit_signal("walkover")
 
 
 func change_state(newstate):
 # Change l'état du PJ (marche, idle, plant...)
 	state = newstate
 	match state:
+		PLANT:
+			animation_loop("PLANT")
+			print("je joue")
 		IDLE:
 			animation_loop("IDLE")
 		MOVE:
@@ -53,6 +62,7 @@ func change_state(newstate):
 
 func animation_loop(mode):
 # gestion de l'animation du PJ
+	
 	var anim_direction = "S"
 	var anim_mode = mode
 	var animation
@@ -71,5 +81,11 @@ func animation_loop(mode):
 
 	animation = anim_mode + "_" + anim_direction
 	self.play(animation) 
+	
+	if frame == 1 or frame == 5:
+		if !$AudioStreamPlayer2D.is_playing():
+			$AudioStreamPlayer2D.play()
+
+
 
 

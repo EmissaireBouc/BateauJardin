@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/Control.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Bateau_Pont.tscn" type="PackedScene" id=2]
@@ -8,13 +8,18 @@
 [ext_resource path="res://Scenes/Transition.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Menu_interactions.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/UI/Font/Quicksand_Bold.otf" type="DynamicFontData" id=8]
-[ext_resource path="res://Scenes/PA.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/PA.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/WalkArea.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/gMouseCollider.gd" type="Script" id=11]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 102.45
 
 [sub_resource type="DynamicFont" id=2]
 size = 26
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 40
 font_data = ExtResource( 8 )
 
@@ -24,14 +29,13 @@ script = ExtResource( 1 )
 [node name="Bateau" parent="." instance=ExtResource( 2 )]
 
 [node name="WalkArea" type="Navigation2D" parent="Bateau"]
+script = ExtResource( 10 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Bateau/WalkArea"]
-position = Vector2( -1025.28, -606.253 )
+modulate = Color( 0.113725, 0.443137, 0.517647, 1 )
 navpoly = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="Bateau/WalkArea"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bateau/WalkArea/Area2D"]
 
 [node name="Jardin" type="Area2D" parent="Bateau"]
 
@@ -42,8 +46,28 @@ polygon = PoolVector2Array( 248, 432, 144, 728, 1104, 720, 1200, 608, 1576, 600,
 
 [node name="YSort" type="YSort" parent="."]
 
+[node name="gMouseCollider" type="Area2D" parent="YSort"]
+visible = false
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/gMouseCollider"]
+shape = SubResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="YSort/gMouseCollider"]
+modulate = Color( 0.235294, 0.721569, 0.152941, 0.670588 )
+polygon = PoolVector2Array( -48, -80, -80, -48, -96, 16, -64, 80, 0, 96, 64, 64, 96, 16, 80, -48, 48, -80, 16, -96 )
+
 [node name="Cabine" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( -224, -80 )
+
+[node name="Sprite" parent="YSort/Cabine" index="0"]
+position = Vector2( -232, -120 )
+
+[node name="Area2D" parent="YSort/Cabine/Sprite" index="1"]
+visible = false
 
 [node name="Porte" type="Area2D" parent="YSort"]
 
@@ -55,9 +79,7 @@ color = Color( 0.337255, 0.152941, 0.541176, 1 )
 polygon = PoolVector2Array( -264, 32, -264, -64, -184, -64, -184, 32 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 5 )]
-
-[node name="Line2D" parent="YSort/Player" index="0"]
-texture_mode = -1107296256
+speed = 200
 
 [node name="Camera2D" type="Camera2D" parent="YSort/Player"]
 current = true
@@ -69,6 +91,22 @@ default_color = Color( 0.780392, 0.262745, 0.192157, 1 )
 texture_mode = -1094713346
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DebugLabel" type="Label" parent="CanvasLayer"]
+margin_left = 8.0
+margin_top = 32.0
+margin_right = 304.0
+margin_bottom = 96.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DebugLabel2" type="Label" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 anchor_top = 1.0
@@ -115,7 +153,7 @@ margin_left = -960.0
 margin_top = -45.5
 margin_right = 960.0
 margin_bottom = 45.5
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Jour"
 align = 1
@@ -129,8 +167,13 @@ __meta__ = {
 [connection signal="input_event" from="Bateau/Jardin" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="Bateau/Jardin" to="." method="_on_Jardin_mouse_entered"]
 [connection signal="mouse_exited" from="Bateau/Jardin" to="." method="_on_Jardin_mouse_exited"]
+[connection signal="area_shape_entered" from="YSort/gMouseCollider" to="YSort/gMouseCollider" method="_on_gMouseCollider_area_shape_entered"]
+[connection signal="area_shape_exited" from="YSort/gMouseCollider" to="YSort/gMouseCollider" method="_on_gMouseCollider_area_shape_exited"]
 [connection signal="input_event" from="YSort/Porte" to="." method="_on_Porte_input_event"]
+[connection signal="walkover" from="YSort/Player" to="." method="_on_Player_walkover"]
 [connection signal="gui_input" from="CanvasLayer/Transition" to="CanvasLayer/Transition" method="_on_Transition_gui_input"]
 [connection signal="transition_over" from="CanvasLayer/Transition" to="." method="_on_Transition_transition_over"]
+
+[editable path="YSort/Cabine"]
 
 [editable path="YSort/Player"]
