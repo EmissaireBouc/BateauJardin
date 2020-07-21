@@ -37,14 +37,16 @@ func _unhandled_input(event):
 
 # Ouverture du menu contextuel
 func _input(event):
-	if Input.is_action_pressed("ui_right_mouse"): 
+	if Input.is_action_pressed("ui_right_mouse"):
 		if get_node_or_null("MenuInteractions") == null:
+			#$CanvasLayer/Control/MenuInteractions.visible = true
 			var MenuInteractions = load("res://Scenes/Menu_interactions.tscn").instance()
 			add_child(MenuInteractions)
 			cursor_mode("default")
 		else:
 			cursor_mode("planter")
-			$MenuInteractions.queue_free()
+			#$CanvasLayer/Control/MenuInteractions.visible = false
+			#$MenuInteractions.queue_free()
 
 func _ready():
 	cursor_mode("default")
