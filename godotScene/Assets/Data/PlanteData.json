@@ -1,20 +1,23 @@
 {
-  "0": {
-    "PlanteName": "Cosmos",
-    "PlantePV": 3,
-    "PlanteXP": 5,
-    "PlanteLVL": 0
+  "Cosmos": {
+    "Name": "Cosmos",
+    "PV": 3,
+    "XP": 5,
+    "LVL": 0,
+    "Available": 1
   },
-  "1": {
-    "PlanteName": "Myosotis",
-    "PlantePV": 2,
-    "PlanteXP": 3,
-    "PlanteLVL": 0
+  "Myosotis": {
+    "Name": "Myosotis",
+    "PV": 2,
+    "XP": 3,
+    "LVL": 0,
+    "Available": 1
   },
-  "2": {
-    "PlanteName": "Cactus",
-    "PlantePV": 4,
-    "PlanteXP": 2,
-    "PlanteLVL": 0
+  "Cactus": {
+    "Name": "Cactus",
+    "PV": 4,
+    "XP": 2,
+    "LVL": 0,
+    "Available": 0
   }
 }

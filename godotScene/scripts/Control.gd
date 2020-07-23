@@ -36,15 +36,12 @@ func _unhandled_input(event):
 # Ouverture du menu contextuel
 func _input(event):
 	if Input.is_action_pressed("ui_right_mouse"):
-		if get_node_or_null("MenuInteractions") == null:
-			#$CanvasLayer/Control/MenuInteractions.visible = true
-			var MenuInteractions = load("res://Scenes/Menu_interactions.tscn").instance()
-			add_child(MenuInteractions)
-			cursor_mode("default")
-		else:
+		if get_node("CanvasLayer/Control/Inventory").visible == false:
+			get_node("CanvasLayer/Control/Inventory").visible = true
 			cursor_mode("planter")
-			#$CanvasLayer/Control/MenuInteractions.visible = false
-			#$MenuInteractions.queue_free()
+		else:
+			cursor_mode("default")
+			get_node("CanvasLayer/Control/Inventory").visible = false
 
 func moving_PJ():
 	var new_path = nav2D.get_simple_path(Player.get_global_position(), get_global_mouse_position())
@@ -73,12 +70,15 @@ func cursor_mode(newMode):
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && Input.is_action_pressed("ui_left_mouse") && cursor == "planter" && $YSort/gMouseCollider.overlapObs == false):
-		if pa > 0: action_planter()
+		if pa > 0: 
+			if $CanvasLayer/Control/Inventory/ItemList.return_selected_item() != null:
+				action_planter()
 
 
 func action_planter():
 	posCursor = get_global_mouse_position()
 	moving_PJ()
+	get_node("CanvasLayer/Control/Inventory").visible = false
 
 func _on_Jardin_mouse_entered():
 	if cursor == "planter":
@@ -103,7 +103,6 @@ func _on_Porte_input_event(viewport, event, shape_idx):
 		fondu("transition_in")
 
 func _on_Transition_transition_over(t):
-	
 	if t == "transition_in":
 		a_day_pass()
 	if t == "transition_out":
@@ -137,7 +136,7 @@ func fondu(animName):
 
 func _on_Player_walkover():
 	if cursor == "planter":
-		var planteName = "Cosmos"
+		var planteName = $CanvasLayer/Control/Inventory/ItemList.return_selected_item()
 		var plante = preload("res://Scenes/PlanteScene/Plante.tscn").instance()
 		plante.init(planteName) # mettre une variable String avec le nom de la plante à créer
 		$YSort.add_child(plante)
@@ -148,4 +147,5 @@ func _on_Player_walkover():
 		$Bateau/WalkArea.update_navigation_polygon(aGarden[0].get_node(planteName).get_global_transform(),aGarden[0].get_node(planteName).get_polygon())
 		$CanvasLayer/Transition/PA.PA_update(pa)
 		Player.change_state(PLANT)
+		
 
