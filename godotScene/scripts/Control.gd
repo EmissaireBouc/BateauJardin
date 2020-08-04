@@ -6,7 +6,6 @@ var planter = load("res://Assets/UI/Curseur/curseur_normal.png")
 var cursor = "default"
 var posCursor
 signal anim_over
-var wait
 var action
 
 #Tableau des plantes
@@ -16,7 +15,6 @@ var aGarden = []
 
 
 export (int) var day = 0
-export (int) var pa = 5
 
 
 # enum est une énumération des différentes animations que le personnage peut jouer
@@ -32,13 +30,14 @@ onready var MouseA : Area2D = get_node("Bateau/YSort/gMouseCollider")
 onready var menuInventaire : Area2D = get_node("CanvasLayer/Control/Inventory")
 onready var menuEntretenir : Area2D = get_node("CanvasLayer/Control/MenuInteractions")
 onready var Cam : Camera2D = get_node("Bateau/YSort/Player/Camera2D")
+onready var PA : Label = get_node("CanvasLayer/PA")
 
 func _ready():
 	change_action(DEFAULT)
 	fondu("transition_out")
 	cursor_mode("default")
 	$CanvasLayer/Transition.visible = true
-	$CanvasLayer/Transition/PA.PA_update(pa)
+	PA.set_PA(5)
 	
 	$AudioStreamPlayer2D.play()
 
@@ -113,7 +112,7 @@ func cursor_mode(newMode):
 
 func _on_Jardin_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && Input.is_action_pressed("ui_right_mouse") && !MouseA.overlapPlant):
-		if pa > 0: 
+		if PA.get_PA() > 0: 
 			match action:
 				DEFAULT:
 					change_action(PLANTER)
@@ -165,16 +164,15 @@ func _on_Player_anim_over(state):
 					menuInventaire.open()
 					Player.change_state(OPEN_INV)
 				PLANT:
+					PA.PA_down(1)
 					var planteName = menuInventaire.get_selected_item()
 					var plante = preload("res://Scenes/PlanteScene/Plante.tscn").instance()
 					plante.init(planteName) # mettre une variable String avec le nom de la plante à créer
 					$Bateau/YSort.add_child(plante)
 					aGarden.push_front(plante)
 					aGarden[0].position = posCursor
-					pa -= 1
 					planteName = planteName + "/Area2D/CollisionPolygon2D"
 					$Bateau/WalkArea.update_navigation_polygon(aGarden[0].get_node(planteName).get_global_transform(),aGarden[0].get_node(planteName).get_polygon())
-					$CanvasLayer/Transition/PA.PA_update(pa)
 					cursor_mode("default")
 					print_garden()
 					Player.change_state(PLANT_BACK)
@@ -185,6 +183,7 @@ func _on_Player_anim_over(state):
 				MOVE:
 					Player.change_state(SPRAY)
 				SPRAY:
+					PA.PA_down(1)
 					plante_PV_up(MouseA.areaName)
 					change_action(DEFAULT)
 		COUPER:
@@ -192,6 +191,7 @@ func _on_Player_anim_over(state):
 				MOVE:
 					Player.change_state(CUT)
 				CUT:
+					PA.PA_down(1)
 					plante_Remove(MouseA.areaName)
 					change_action(DEFAULT)
 		DORMIR:
@@ -225,16 +225,14 @@ Gestion des actions Entretenir :
 
 func plante_PV_up(plant):
 	get_node("Bateau/YSort/%s" %plant).pv += 5
-	pa -= 1
 	MouseA.clear_aCollisionNode()
 
 func plante_Remove(plant):
-	for i in range(aGarden.size()):
+	for i in range(aGarden.size()-1):
 		if aGarden[i] == get_node("Bateau/YSort/%s" %plant):
 			aGarden.remove(i)
 	get_node("Bateau/YSort/%s" %plant).queue_free()
 	print_garden()
-	pa -= 1
 	MouseA.clear_aCollisionNode()
 
 """
@@ -285,8 +283,7 @@ func fondu(animName):
 
 func a_day_pass():
 	day += 1
-	pa = 5 
-	$CanvasLayer/Transition/PA.PA_update(pa)
+	PA.set_PA(5)
 	$CanvasLayer/Transition/Jour.text = "Jour "+str(day)
 	$CanvasLayer/Transition/Jour.visible = true
 	$CanvasLayer/Transition.waitForClick = true
@@ -300,7 +297,7 @@ func plante_PV_down():
 			aGarden[i].fane()
 
 func plante_XP_up():
-	for i in range(aGarden.size()):
+	for i in range(aGarden.size()-1):
 		aGarden[i].xp -= 1
 		if aGarden[i].xp == 0:
 			aGarden[i].LVL_up()
