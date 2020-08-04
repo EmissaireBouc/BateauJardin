@@ -1,34 +1,116 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/ItemList.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Inventaire_plantes.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Plante/icon_ts.png" type="Texture" id=3]
+[ext_resource path="res://Assets/UI/Font/Quicksand_Book.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/UI/Inv/boiteagrainetest1.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UI/Inv/UI_theme.tres" type="Theme" id=6]
+
+
+[sub_resource type="Animation" id=1]
+resource_name = "Apparition"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/TextureRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.517633, 0.34151 ),
+"update": 0,
+"values": [ Vector2( -900, -8 ), Vector2( -232, -8 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Fermeture"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/TextureRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2.46228, 1.86607 ),
+"update": 0,
+"values": [ Vector2( -232, -8 ), Vector2( -900, -8 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="DynamicFont" id=4]
+size = 14
+font_data = ExtResource( 4 )
 
 [node name="Inventory" type="Control"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -192.0
-margin_top = -208.0
-margin_right = 192.0
-margin_bottom = -48.0
+anchor_top = -0.007
+anchor_bottom = -0.007
+margin_left = -232.0
+margin_top = -24.44
+margin_right = -232.0
+margin_bottom = -24.44
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ItemList" type="ItemList" parent="."]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 368.0
-margin_bottom = 144.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Apparition = SubResource( 1 )
+anims/Fermeture = SubResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="AnimationPlayer"]
+margin_left = -900.0
+margin_top = -8.0
+margin_right = -6.10352e-05
+margin_bottom = 976.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="AnimationPlayer/TextureRect"]
+anchor_left = -2.0
+anchor_top = -5.45
+anchor_right = -2.0
+anchor_bottom = -5.45
+margin_left = 2113.0
+margin_top = 5531.8
+margin_right = 2633.0
+margin_bottom = 6216.8
+theme = ExtResource( 6 )
+custom_styles/bg = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 max_columns = 5
-fixed_column_width = 64
+same_column_width = true
+fixed_column_width = 96
 icon_mode = 0
-fixed_icon_size = Vector2( 32, 32 )
+fixed_icon_size = Vector2( 64, 64 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="B_Valider" type="Button" parent="AnimationPlayer/TextureRect"]
+margin_left = 708.0
+margin_top = 776.0
+margin_right = 792.0
+margin_bottom = 816.0
+text = "Valider"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="B_Annuler" type="Button" parent="AnimationPlayer/TextureRect"]
+margin_left = 596.0
+margin_top = 776.0
+margin_right = 684.0
+margin_bottom = 816.0
+text = "Annuler"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 visible = false
@@ -114,3 +196,7 @@ position = Vector2( -36, 22 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 128, 0, 32, 32 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="item_selected" from="AnimationPlayer/TextureRect/ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="pressed" from="AnimationPlayer/TextureRect/B_Valider" to="." method="_on_B_Valider_pressed"]
+[connection signal="pressed" from="AnimationPlayer/TextureRect/B_Annuler" to="." method="_on_B_Annuler_pressed"]

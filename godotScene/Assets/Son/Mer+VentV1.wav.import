@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Mer+VentV1.wav-97f0fb20bcf0c4f31aea3128a7fc7f19.sample"
+
+[deps]
+
+source_file="res://Assets/Son/Mer+VentV1.wav"
+dest_files=[ "res://.import/Mer+VentV1.wav-97f0fb20bcf0c4f31aea3128a7fc7f19.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

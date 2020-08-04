@@ -8,7 +8,3 @@ func _ready():
 	var plantdata_json = JSON.parse(plantdata_file.get_as_text())
 	plantdata_file.close()
 	plant_data = plantdata_json.result
-
-
-
-

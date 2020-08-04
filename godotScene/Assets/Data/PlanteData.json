@@ -4,20 +4,175 @@
     "PV": 3,
     "XP": 5,
     "LVL": 0,
-    "Available": 1
+    "Available": 1,
+    "ID": 0
   },
   "Myosotis": {
     "Name": "Myosotis",
     "PV": 2,
     "XP": 3,
     "LVL": 0,
-    "Available": 1
+    "Available": 1,
+    "ID": 1
   },
   "Cactus": {
     "Name": "Cactus",
     "PV": 4,
     "XP": 2,
     "LVL": 0,
-    "Available": 0
+    "Available": 1,
+    "ID": 2
+  },
+  "Pleureur": {
+    "Name": "Pleureur",
+    "PV": 8,
+    "XP": 8,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 3
+  },
+  "Arbuste": {
+    "Name": "Arbuste",
+    "PV": 7,
+    "XP": 8,
+    "LVL": 0,
+    "Available": 0,
+    "ID": 4
+  },
+  "HautArbuste": {
+    "Name": "HautArbuste",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 0,
+    "ID": 5
+  },
+  "BuissonBlanc": {
+    "Name": "BuissonBlanc",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 6
+  },
+  "BuissonBlanc2": {
+    "Name": "BuissonBlanc2",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 7
+  },
+  "BuissonBleu": {
+    "Name": "BuissonBleu",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 8
+  },
+  "BuissonRose": {
+    "Name": "BuissonRose",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 9
+  },
+  "CactusOrange": {
+    "Name": "CactusOrange",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 10
+  },
+  "CactusRouge": {
+    "Name": "CactusRouge",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 11
+  },
+  "FeuillesVertRouge": {
+    "Name": "FeuillesVertRouge",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 0,
+    "ID": 12
+  },
+  "Flocons": {
+    "Name": "Flocons",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 13
+  },
+  "Glycines": {
+    "Name": "Glycines",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 14
+  },
+  "JaunesHautes": {
+    "Name": "JaunesHautes",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 15
+  },
+  "OrangeFines": {
+    "Name": "OrangeFines",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 16
+  },
+  "OreillesDeLapin": {
+    "Name": "OreillesDeLapin",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 17
+  },
+  "Pompom": {
+    "Name": "Pompom",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 18
+  },
+  "RoseTremiere": {
+    "Name": "RoseTremiere",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 19
+  },
+  "RosesPlates": {
+    "Name": "RosesPlates",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 20
+  },
+  "Rouge": {
+    "Name": "Rouge",
+    "PV": 7,
+    "XP": 7,
+    "LVL": 0,
+    "Available": 1,
+    "ID": 21
   }
 }

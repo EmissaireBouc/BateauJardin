@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/PlanteScene/Cosmos.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Plante/PlanteTest/feuilles vert rouge .png" type="Texture" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "lvl3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "lvl1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "fane",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "lvl2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "apparition",
+"speed": 5.0
+} ]
+
+[node name="FeuillesVertRouge" instance=ExtResource( 1 )]
+frames = SubResource( 1 )
+offset = Vector2( -35, -120 )
+
+[node name="CollisionPolygon2D" parent="Area2D" index="0"]
+polygon = PoolVector2Array( -24, 8, -16, 32, 16, 32, 8, 8 )

@@ -1,13 +1,23 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/PlanteScene/Cosmos.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Plante/Myosotis.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Plante/PlanteTest/bleu jaune.png" type="Texture" id=2]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
+"name": "lvl3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
 "name": "lvl1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "fane",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ) ],
@@ -19,18 +29,8 @@ animations = [ {
 "loop": false,
 "name": "apparition",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "lvl3",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "fane",
-"speed": 5.0
 } ]
 
 [node name="Myosotis" instance=ExtResource( 1 )]
 frames = SubResource( 1 )
-offset = Vector2( 0, -10 )
+offset = Vector2( 0, -50 )

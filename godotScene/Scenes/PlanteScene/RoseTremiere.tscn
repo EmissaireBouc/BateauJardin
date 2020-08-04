@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/PlanteScene/Cosmos.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Plante/PlanteTest/rose tremiere.png" type="Texture" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "lvl3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "lvl1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "fane",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "lvl2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "apparition",
+"speed": 5.0
+} ]
+
+[node name="RoseTremiere" instance=ExtResource( 1 )]
+frames = SubResource( 1 )
+offset = Vector2( -80, -250 )
+
+[node name="CollisionPolygon2D" parent="Area2D" index="0"]
+position = Vector2( -40, 16 )
+scale = Vector2( 1.02083, 1 )
+polygon = PoolVector2Array( 31.347, -16, 31.347, 16, 47.0206, 16, 47.0206, -16 )

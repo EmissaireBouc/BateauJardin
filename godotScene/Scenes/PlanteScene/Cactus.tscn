@@ -1,86 +1,43 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Plante/SS_Cactus.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Plante/PlanteTest/cactus rond 2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Plante/PlanteTest/cactus rond.png" type="Texture" id=2]
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 60, 60, 60 )
-
-[sub_resource type="AtlasTexture" id=2]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 120, 60, 60 )
-
-[sub_resource type="AtlasTexture" id=3]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 60, 60 )
-
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 60, 0, 60, 60 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 120, 0, 60, 60 )
-
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 180, 0, 60, 60 )
-
-[sub_resource type="AtlasTexture" id=7]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 240, 0, 60, 60 )
-
-[sub_resource type="AtlasTexture" id=8]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 180, 60, 60 )
-
-[sub_resource type="AtlasTexture" id=9]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 240, 60, 60 )
-
-[sub_resource type="SpriteFrames" id=10]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
-"loop": true,
-"name": "lvl1",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 2 ) ],
-"loop": true,
-"name": "lvl2",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
-"loop": false,
-"name": "apparition",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 8 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "lvl3",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 9 ) ],
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "lvl1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "fane",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "lvl2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "apparition",
 "speed": 5.0
 } ]
 
 [node name="Cactus" type="AnimatedSprite"]
-frames = SubResource( 10 )
+frames = SubResource( 1 )
 animation = "apparition"
 offset = Vector2( 0, -30 )
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PoolVector2Array( 0, -8, -8, -8, -8, 8, 8, 8, 8, -8 )
+polygon = PoolVector2Array( 0, -16, -32, -16, -32, 8, 24, 8, 24, -16 )
